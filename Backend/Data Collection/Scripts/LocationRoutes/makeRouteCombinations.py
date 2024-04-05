@@ -9,8 +9,7 @@ def createCombinations(places):
         cluster_stop = int(combo[1]['Cluster'])
         urlName1 = combo[0]['urlName']
         urlName2 = combo[1]['urlName']
-        link = f"https://www.rome2rio.com/map/{urlName1}/{urlName2}"
-        combinations_list.append((cluster_start, cluster_stop, link))
+        combinations_list.append((cluster_start, cluster_stop, urlName1, urlName2))
         
     return combinations_list
 
@@ -24,11 +23,11 @@ def main():
     combinations_list = createCombinations(places)
 
     with open(csv_output_file, 'w', newline='', encoding='utf-8') as outfile:
-        fieldnames = ['Cluster_Start', 'Cluster_Stop', 'Link']
+        fieldnames = ['Cluster_Start', 'Cluster_Stop', 'urlName1', 'urlName2']
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
         for combination in combinations_list:
-            writer.writerow({'Cluster_Start': combination[0], 'Cluster_Stop': combination[1], 'Link': combination[2]})
+            writer.writerow({'Cluster_Start': combination[0], 'Cluster_Stop': combination[1], 'urlName1': combination[2], 'urlName2': combination[3]})
     
     print("\033[92mCombinations with links have been created successfully.\033[0m")
 

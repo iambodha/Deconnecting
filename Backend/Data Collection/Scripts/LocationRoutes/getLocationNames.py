@@ -38,6 +38,18 @@ def process_location_name(args):
             canonical_name = first_result['canonicalName']
             new_row = row + [canonical_name]
             return new_row
+        other_url = f"https://www.rome2rio.com/api/1.6/Autocomplete?key=jGq3Luw3&query={urllib.parse.quote(location_name)}&languageCode=en"
+        repeated_response = requests.get(other_url, headers=headers)
+        if repeated_response.status_code == 200:
+            repeated_json_data = repeated_response.json()
+            repeated_results = repeated_json_data['results']
+            if repeated_results:
+                repeated_first_result = repeated_results[0]
+                repeated_canonical_name = repeated_first_result['canonicalName']
+                new_row = row + [repeated_canonical_name]
+                return new_row
+        else:
+            print("No results found for", location_name)
     return row
 
 def process_location_names(csv_input_file, csv_output_file, skipNum):
