@@ -118,33 +118,39 @@ def process_row(row):
         csv_writer.writerow(row)
     return row
 
-csv_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'allData', 'all_combinations_with_links.csv')
-output_csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'allData', 'all_routes.csv')
+def main():
+    global current_cookie
+    global last_call_time
+    csv_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'allData', 'all_combinations_with_links.csv')
+    output_csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'allData', 'all_routes.csv')
 
-with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-    rows = list(csv_reader)
-    header = csv_reader.fieldnames + ['Routes']
+    with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        rows = list(csv_reader)
+        header = csv_reader.fieldnames + ['Routes']
 
-if os.path.exists(output_csv_path):
-    existing_rows = set()
-    with open(output_csv_path, 'r', encoding='utf-8') as output_csv_file:
-        output_csv_reader = csv.DictReader(output_csv_file)
-        for existing_row in output_csv_reader:
-            key = (existing_row['Cluster_Start'], existing_row['Cluster_Stop'])
-            existing_rows.add(key)
+    if os.path.exists(output_csv_path):
+        existing_rows = set()
+        with open(output_csv_path, 'r', encoding='utf-8') as output_csv_file:
+            output_csv_reader = csv.DictReader(output_csv_file)
+            for existing_row in output_csv_reader:
+                key = (existing_row['Cluster_Start'], existing_row['Cluster_Stop'])
+                existing_rows.add(key)
 
-    rows = [row for row in rows if (row['Cluster_Start'], row['Cluster_Stop']) not in existing_rows]
+        rows = [row for row in rows if (row['Cluster_Start'], row['Cluster_Stop']) not in existing_rows]
 
-else:
-    with open(output_csv_path, 'w', newline='', encoding='utf-8') as output_csv:
-        csv_writer = csv.DictWriter(output_csv, fieldnames=header)
-        csv_writer.writeheader()
+    else:
+        with open(output_csv_path, 'w', newline='', encoding='utf-8') as output_csv:
+            csv_writer = csv.DictWriter(output_csv, fieldnames=header)
+            csv_writer.writeheader()
 
-num_rows = len(rows)
+    num_rows = len(rows)
 
-with open(output_csv_path, 'a', newline='', encoding='utf-8') as output_csv:
-    with ThreadPoolExecutor() as executor:
-        processed_rows = list(executor.map(process_row, rows))
+    with open(output_csv_path, 'a', newline='', encoding='utf-8') as output_csv:
+        with ThreadPoolExecutor() as executor:
+            processed_rows = list(executor.map(process_row, rows))
 
-print("\033[92m" + f"Script completed. Output CSV saved to {output_csv_path}" + "\033[0m")
+    print("\033[92m" + f"Script completed. Output CSV saved to {output_csv_path}" + "\033[0m")
+
+if __name__ == '__main__':
+    main()

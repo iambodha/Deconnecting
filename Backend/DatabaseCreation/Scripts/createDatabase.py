@@ -1,6 +1,7 @@
 import psycopg2
 import csv
 from collections import OrderedDict
+csv.field_size_limit(2147483647)
 
 def create_tables(cursor):
     cursor.execute("""
@@ -49,7 +50,27 @@ def create_tables(cursor):
         )
     """)
 
-def load_data(all_locations, all_stays, all_clusters, all_routes):
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS attractions (
+            cid NUMERIC PRIMARY KEY,
+            title TEXT NOT NULL,
+            link TEXT NOT NULL,
+            category TEXT NOT NULL,
+            address TEXT NOT NULL,
+            website TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            plus_code TEXT NOT NULL,
+            review_count INT NOT NULL,
+            review_rating FLOAT NOT NULL,
+            latitude FLOAT NOT NULL,
+            longitude FLOAT NOT NULL,
+            descriptions TEXT NOT NULL,
+            images_list TEXT[]
+        )
+    """)
+            
+
+def load_data(all_locations, all_stays, all_clusters, all_routes, all_attractions):
     location_data = {}
     with open(all_locations, 'r', encoding='utf-8') as csvfile:
         csvreader = csv.DictReader(csvfile)
@@ -124,14 +145,47 @@ def load_data(all_locations, all_stays, all_clusters, all_routes):
                     routes[link] = (cluster_id_1, cluster_id_2, name, time, modes, cost)
             except:
                 number_error += 1
-    print(number_error)
 
     hotel_data = OrderedDict(sorted(hotel_data.items()))
     location_data = OrderedDict(sorted(location_data.items()))
 
-    return location_data, location_hotel_data, cluster_data, hotel_data, routes
+    attractions = {}
+    with open(all_attractions, 'r', encoding='utf-8') as csvfile:
+        csvreader = csv.DictReader(csvfile)
+        for row in csvreader:
+            cid = int(row['cid'])
+            title = row['title']
+            link = row['link']
+            category = row['category']
+            address = row['address']
+            website = row['website']
+            phone = row['phone']
+            plus_code = row['plus_code']
+            review_count = int(row['review_count'])
+            review_rating = float(row['review_rating'])
+            latitude = float(row['latitude'])
+            longitude = float(row['longitude'])
+            descriptions = row['descriptions']
+            images_list = eval(row['images'])
+            attractions[cid] = {
+                'title': title,
+                'link': link,
+                'category': category,
+                'address': address,
+                'website': website,
+                'phone': phone,
+                'plus_code': plus_code,
+                'review_count': review_count,
+                'review_rating': review_rating,
+                'latitude': latitude,
+                'longitude': longitude,
+                'descriptions': descriptions,
+                'images_list': images_list
+            }
 
-def insert_data(cursor, location_data, location_hotel_data, cluster_data, hotel_data, routes, all_clusters_centroids):
+    return location_data, location_hotel_data, cluster_data, hotel_data, routes, attractions
+
+def insert_data(cursor, location_data, location_hotel_data, cluster_data, hotel_data, routes, attractions, all_clusters_centroids):
     for cluster_id, location_ids in cluster_data.items():
         with open(all_clusters_centroids, 'r', encoding='utf-8') as csvfile:
             csvreader = csv.DictReader(csvfile)
@@ -165,12 +219,19 @@ def insert_data(cursor, location_data, location_hotel_data, cluster_data, hotel_
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (link, data[0], data[1], data[2], data[3], data[4], data[5]))
 
+    for cid, data in attractions.items():
+        cursor.execute("""
+            INSERT INTO attractions (cid, title, link, category, address, website, phone, plus_code, review_count, review_rating, latitude, longitude, descriptions, images_list)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (cid, data['title'], data['link'], data['category'], data['address'], data['website'], data['phone'], data['plus_code'], data['review_count'], data['review_rating'], data['latitude'], data['longitude'], data['descriptions'], data['images_list']))
+
 def main():
     all_locations = "../../DataCollection/Scripts/allData/all_locations.csv"
     all_stays = "../../DataCollection/Scripts/allData/all_unique_stays.csv"
     all_clusters = "../../DataCollection/Scripts/allData/all_clusters.csv"
     all_routes = "../../DataCollection/Scripts/allData/all_routes.csv"
     all_clusters_centroids = "../../DataCollection/Scripts/allData/all_clusters_centroids.csv"
+    all_attractions = "../../DataCollection/Scripts/allData/all_attractions.csv"
 
     host = input("Enter the host: ")
     database = input("Enter the database: ")
@@ -187,12 +248,12 @@ def main():
     cur = conn.cursor()
 
     create_tables(cur)
-    location_data, location_hotel_data, cluster_data, hotel_data, routes = load_data(all_locations, all_stays, all_clusters, all_routes)
-    insert_data(cur, location_data, location_hotel_data, cluster_data, hotel_data, routes, all_clusters_centroids)
+    location_data, location_hotel_data, cluster_data, hotel_data, routes, attractions = load_data(all_locations, all_stays, all_clusters, all_routes, all_attractions)
+    insert_data(cur, location_data, location_hotel_data, cluster_data, hotel_data, routes, attractions, all_clusters_centroids)
 
     conn.commit()
     cur.close()
     conn.close()
-
+    print("\033[92mDatabase created successfully\033[0m")
 if __name__ == "__main__":
     main()
