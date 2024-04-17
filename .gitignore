@@ -3,3 +3,6 @@ chromedriver.exe
 *.txt
 node_modules
 googleMapsScraperbyGeorgiosKomninos
+.mypy_cache
+__pycache__
+Deconnecting
