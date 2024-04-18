@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Body
 import psycopg2
+import psycopg2.extras
 
 conn = psycopg2.connect(
     host = input("Database Host:"),
@@ -27,12 +28,40 @@ def get_location_listing(payload: dict = Body(...)):
     tripEndTime = payload.get('tripEndTime')
     totalTripHours = payload.get('totalTripHours')
 
+    locationGeonameId = int(findSimilarStringSQL("locations", location, "name")[0])
+    locationClusterId = int(findSimilarValueinList("clusters", locationGeonameId, "location_id_list")[0])
+    
     result = {
-        'locations': [
-            {'name': 'Location 1', 'price': 500},
-            {'name': 'Location 2', 'price': 800},
-            {'name': 'Location 3', 'price': 700},
-        ]
+        'locations': locationGeonameId
     }
     return result
 
+def findSimilarStringSQL(tableName,searchQuery,coloumn):
+    querySQL = f"""
+            CREATE EXTENSION IF NOT EXISTS pg_trgm;
+            SELECT *
+            FROM {tableName}
+            ORDER BY SIMILARITY(LOWER({coloumn}), LOWER(%s)) DESC
+            LIMIT 1;
+        """
+
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cur.execute(querySQL,(searchQuery,))
+    result = cur.fetchone()
+    cur.close()
+
+    return result
+
+def findSimilarValueinList(tableName,searchQuery,coloumn):
+    querySQL = f"""
+            SELECT *
+            FROM {tableName}
+            WHERE {searchQuery} = ANY({coloumn})
+            LIMIT 1;
+        """
+    cur = conn.cursor()
+    cur.execute(querySQL)
+    result = cur.fetchone()
+    cur.close()
+
+    return result

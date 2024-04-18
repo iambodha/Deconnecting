@@ -113,6 +113,7 @@ def process_row(row):
     cluster_start = row['Cluster_Start']
     cluster_stop = row['Cluster_Stop']
     print("\033[92m" + f"Cluster Numbers: {cluster_start},{cluster_stop}" + "\033[0m")
+    output_csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'allData', 'all_routes.csv')
     with open(output_csv_path, 'a', newline='', encoding='utf-8') as output_csv:
         csv_writer = csv.DictWriter(output_csv, fieldnames=row.keys())
         csv_writer.writerow(row)

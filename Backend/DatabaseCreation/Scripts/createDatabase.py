@@ -1,6 +1,7 @@
 import psycopg2
 import csv
 from collections import OrderedDict
+import json
 csv.field_size_limit(2147483647)
 
 def create_tables(cursor):
@@ -40,13 +41,14 @@ def create_tables(cursor):
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS routes (
-            link TEXT PRIMARY KEY,
-            cluster_id_1 INT NOT NULL,
-            cluster_id_2 INT NOT NULL,
-            name TEXT NOT NULL,
-            time TEXT NOT NULL,
+            cluster_id_1 INT,
+            cluster_id_2 INT,
+            link TEXT,
+            time INT NOT NULL,
             modes TEXT NOT NULL,
-            cost TEXT NOT NULL
+            cost INTEGER[],
+            places TEXT[],
+            PRIMARY KEY (cluster_id_1, cluster_id_2, link)
         )
     """)
 
@@ -135,16 +137,19 @@ def load_data(all_locations, all_stays, all_clusters, all_routes, all_attraction
                 cluster_id_2 = int(row['Cluster_Stop'])
                 current_routes = eval(row['Routes'])
                 for route in current_routes:
-                    if route['Cost'] == None:
-                        route['Cost'] = 'Unknown'
+                    if isinstance(route['Cost'], str):
+                        cost_range = route['Cost'].replace('€', '').split('–')
+                        cost = [int(cost.strip()) for cost in cost_range]
+                    else:
+                        cost = None
                     link = route['Link']
-                    time = route['Time']
-                    name = route['Route']
+                    time = int(route['Time'])
                     modes = route['Method of Transport']
-                    cost = route['Cost']
-                    routes[link] = (cluster_id_1, cluster_id_2, name, time, modes, cost)
+                    places = route['Places']
+                    routes[(cluster_id_1, cluster_id_2, link)] = (time, modes, cost, places)
             except:
                 number_error += 1
+    print(number_error)
 
     hotel_data = OrderedDict(sorted(hotel_data.items()))
     location_data = OrderedDict(sorted(location_data.items()))
@@ -213,11 +218,12 @@ def insert_data(cursor, location_data, location_hotel_data, cluster_data, hotel_
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (hotel_id, data['name'], data['latitude'], data['longitude'], data['price'], data['rating'], data['description']))
 
-    for link, data in routes.items():
+    for (cluster_id_1, cluster_id_2, link), data in routes.items():
+        time, modes, cost, places = data
         cursor.execute("""
-            INSERT INTO routes (link, cluster_id_1, cluster_id_2, name, time, modes, cost)
+            INSERT INTO routes (cluster_id_1, cluster_id_2, link, time, modes, cost, places)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """, (link, data[0], data[1], data[2], data[3], data[4], data[5]))
+        """, (cluster_id_1, cluster_id_2, link, time, modes, cost, places))
 
     for cid, data in attractions.items():
         cursor.execute("""
@@ -242,7 +248,8 @@ def main():
         host=host,
         database=database,
         user=user,
-        password=password
+        password=password,
+        options='-c client_encoding=utf8'
     )
 
     cur = conn.cursor()
@@ -255,5 +262,6 @@ def main():
     cur.close()
     conn.close()
     print("\033[92mDatabase created successfully\033[0m")
+
 if __name__ == "__main__":
     main()

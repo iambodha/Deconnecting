@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import json
+import requests
 
 class User:
     def __init__(self, location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime):
@@ -24,7 +25,7 @@ class User:
         return round(int(totalHours))
 
     def createPayload(self):
-        payload = {
+        return {
             'operation': 'getLocationListing',
             'location': self.location,
             'budget': self.budget,
@@ -34,9 +35,6 @@ class User:
             'tripEndTime': self.tripEndTime,
             'totalTripHours': self.totalTripTime,
         }
-        return json.dumps(payload)
-
-
 def main():
     location = input('Enter your City/Town: ')
     budget = int(input('Enter your travel budget: '))
@@ -45,8 +43,8 @@ def main():
     tripEndDate = input('Ending date of your trip(YYYY-MM-DD): ')
     tripEndTime = input('At what time will you like to come back(0-23h): ')
     testUser = User(location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime)
-    print(testUser.totalTripTime)
-
+    response = requests.post("http://localhost:8000/getLocationListing", json=testUser.createPayload())
+    print(response.json())
 
 if __name__ == '__main__':
     main()
