@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Body
 import psycopg2
 import psycopg2.extras
+import re
 
 conn = psycopg2.connect(
     host = input("Database Host:"),
@@ -21,18 +22,22 @@ def read_root():
 def get_location_listing(payload: dict = Body(...)):
     operation = payload.get('operation')
     location = payload.get('location')
-    budget = payload.get('budget')
+    budget = int(payload.get('budget'))
     tripStartDate = payload.get('tripStartDate')
     tripEndDate = payload.get('tripEndDate')
     tripStartTime = payload.get('tripStartTime')
     tripEndTime = payload.get('tripEndTime')
-    totalTripHours = payload.get('totalTripHours')
+    totalTripHours = int(payload.get('totalTripHours'))
+    modesNotAllowed = payload.get('modesOfTransport')
 
     locationGeonameId = int(findSimilarStringSQL("locations", location, "name")[0])
     locationClusterId = int(findSimilarValueinList("clusters", locationGeonameId, "location_id_list")[0])
+    possibleRoutes = findRouteswithFilters("routes", locationClusterId, totalTripHours*3600, budget, modesNotAllowed)
     
     result = {
-        'locations': locationGeonameId
+        'locations': locationGeonameId,
+        'Id': locationClusterId,
+        'routes': possibleRoutes,
     }
     return result
 
@@ -63,5 +68,21 @@ def findSimilarValueinList(tableName,searchQuery,coloumn):
     cur.execute(querySQL)
     result = cur.fetchone()
     cur.close()
+
+    return result
+
+def findRouteswithFilters(tableName, searchQuery, totalTripSeconds, budget, modesNotAllowed):
+    modesOfTransport = '|'.join(map(re.escape, modesNotAllowed))
+    querySQL = f"""
+            SELECT *
+            FROM {tableName}
+            WHERE (cluster_id_1 = {searchQuery} OR cluster_id_2 = {searchQuery})
+            AND time * 2 < {totalTripSeconds}
+            AND (cost[1] * 2) < {budget}
+            AND modes !~ '({modesOfTransport})';
+        """
+    cur = conn.cursor()
+    cur.execute(querySQL)
+    result = cur.fetchall()
 
     return result

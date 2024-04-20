@@ -3,7 +3,7 @@ import json
 import requests
 
 class User:
-    def __init__(self, location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime):
+    def __init__(self, location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime, modesOfTransport):
         self.location = location
         self.budget = budget
         self.tripStartDate = tripStartDate
@@ -11,10 +11,15 @@ class User:
         self.tripStartTime = self.formatHour(tripStartTime)
         self.tripEndTime = self.formatHour(tripEndTime)
         self.totalTripTime = self.calculateTripTime()
+        self.modesOfTransport = self.extractModesOfTransport(modesOfTransport)
 
     @staticmethod
     def formatHour(hourEntry):
         return int(hourEntry.upper().replace('H', ''))
+
+    @staticmethod
+    def extractModesOfTransport(modesOfTransport):
+        return [mode.strip() for mode in modesOfTransport.split(",")]
 
     def calculateTripTime(self):
         startDate = datetime.strptime(self.tripStartDate, '%Y-%m-%d')
@@ -34,6 +39,7 @@ class User:
             'tripStartTime': self.tripStartTime,
             'tripEndTime': self.tripEndTime,
             'totalTripHours': self.totalTripTime,
+            'modesOfTransport': self.modesOfTransport,
         }
 def main():
     location = input('Enter your City/Town: ')
@@ -42,7 +48,8 @@ def main():
     tripStartTime = input('At what time will you leave(0-23h): ')
     tripEndDate = input('Ending date of your trip(YYYY-MM-DD): ')
     tripEndTime = input('At what time will you like to come back(0-23h): ')
-    testUser = User(location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime)
+    modesOfTransport = input('Which modes of transport do you not want (Car, Train, Plane, Bus) use commas to seprate values: ')
+    testUser = User(location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime,modesOfTransport)
     response = requests.post("http://localhost:8000/getLocationListing", json=testUser.createPayload())
     print(response.json())
 
