@@ -23,7 +23,8 @@ def create_tables(cursor):
             first_order TEXT NOT NULL,
             second_order TEXT NOT NULL,
             third_order TEXT NOT NULL,
-            hotel_id_list INT[]
+            hotel_id_list INT[],
+            lowest_hotel_price FLOAT NOT NULL
         )
     """)
 
@@ -207,10 +208,14 @@ def insert_data(cursor, location_data, location_hotel_data, cluster_data, hotel_
     for geoname_id, data in location_data.items():
         hotel_ids = [hotel['hotelId'] for hotel in location_hotel_data.get(geoname_id, [])]
         hotel_id_list = [int(hotel_id) if hotel_id is not None else None for hotel_id in hotel_ids]
+
+        hotel_prices = [hotel_data[hotel_id]['price'] for hotel_id in hotel_id_list if hotel_id in hotel_data]
+        lowest_hotel_price = min(hotel_prices) if hotel_prices else 0.0
+        
         cursor.execute("""
-            INSERT INTO locations (geoname_id, name, latitude, longitude, first_order, second_order, third_order, hotel_id_list)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        """, (geoname_id, data['name'], data['latitude'], data['longitude'], data['first_order'], data['second_order'], data['third_order'], hotel_id_list))
+            INSERT INTO locations (geoname_id, name, latitude, longitude, first_order, second_order, third_order, hotel_id_list, lowest_hotel_price)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (geoname_id, data['name'], data['latitude'], data['longitude'], data['first_order'], data['second_order'], data['third_order'], hotel_id_list, lowest_hotel_price))
 
     for hotel_id, data in hotel_data.items():
         cursor.execute("""

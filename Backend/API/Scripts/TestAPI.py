@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import json
 import requests
+import time
 
 class User:
     def __init__(self, location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime, modesOfTransport):
@@ -42,6 +43,7 @@ class User:
             'modesOfTransport': self.modesOfTransport,
         }
 def main():
+    """
     location = input('Enter your City/Town: ')
     budget = int(input('Enter your travel budget: '))
     tripStartDate = input('Starting date of your trip(YYYY-MM-DD): ')
@@ -49,9 +51,21 @@ def main():
     tripEndDate = input('Ending date of your trip(YYYY-MM-DD): ')
     tripEndTime = input('At what time will you like to come back(0-23h): ')
     modesOfTransport = input('Which modes of transport do you not want (Car, Train, Plane, Bus) use commas to seprate values: ')
+    """
+    location = "Berlin"
+    budget = 800 
+    tripStartDate = "2024-06-08"
+    tripStartTime = "8"
+    tripEndDate = "2024-06-10"
+    tripEndTime = "8"
+    modesOfTransport = "Plane, Car"
     testUser = User(location, budget, tripStartDate, tripEndDate, tripStartTime, tripEndTime,modesOfTransport)
+    start_time = time.time()
     response = requests.post("http://localhost:8000/getLocationListing", json=testUser.createPayload())
-    print(response.json())
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print("Response time:", elapsed_time, "seconds")
+    print(response)
 
 if __name__ == '__main__':
     main()
