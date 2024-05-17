@@ -18,7 +18,7 @@ function Hero() {
           <li className='archivo navitem'>About Us</li>
           <div className='special-button'>
             <i className="uil uil-envelope-search"></i>
-            <span className='archivo special'>Enquire</span>
+            <span className='archivo special'>Create!</span>
           </div>
         </ul>
       </nav>
