@@ -1,0 +1,20 @@
+:root{
+    --bg1: #005055;
+    --bg2: #283A2C;
+    --bg3: #DADDC5;
+    --bg4: #B1B87D;
+    --bg5: #C3C1C0;
+
+    --btn1: #7F2604;
+    --btn2: #4F2F28;
+    --btn3: #3F1103;
+    --btn4: #DCA482;
+
+    --sp2: #41503D;
+}
+
+
+body{
+    border: none;
+    margin: 0;
+}

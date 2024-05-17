@@ -1,0 +1,143 @@
+body {
+  background-color: white;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: black;
+}
+
+.exploreContainerMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.exploreContent {
+  padding-top: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  position: relative;
+  padding-bottom: 15rem;
+}
+
+#image-track {
+  z-index: 1;
+  margin-top: 0;
+  display: flex;
+  gap: 4vmin;
+  user-select: none;
+  position: relative;
+  top: 15rem;
+  left: 10%;
+  cursor: grab;
+}
+
+.card {
+  width: 40vmin;
+  height: 80vmin;
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s ease-in-out;
+}
+
+.card {
+  transition: transform 0.8s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.country-info {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.country-icon {
+  width: 2rem;
+  height: 2rem;
+  filter: grayscale(1) invert(1);
+}
+
+.country-name {
+  font-family: 'Archivo';
+  font-size: 1rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.card-title,
+.card-subtitle,
+.card-text,
+.card-footer {
+  position: absolute;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  text-align: left;
+  margin-left: 1rem;
+  font-family: 'Archivo';
+}
+
+.card-title {
+  top: 70%;
+  font-size: 1.5rem;
+}
+
+.card-subtitle {
+  top: 65%;
+  font-size: 1.2rem;
+}
+
+.card-text {
+  top: 75%;
+  font-size: 1rem;
+  width: calc(100% - 2rem);
+}
+
+.card-footer {
+  bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+}
+
+.card-price {
+  font-size: 1rem;
+}
+
+.card-button {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.card-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}

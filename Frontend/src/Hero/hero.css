@@ -1,0 +1,193 @@
+h1, h2, h3, h4, .lora{
+    font-family:'Lora'
+}
+p, .archivo{
+    font-family: 'Archivo'
+}
+.heromainContainer{
+    overflow: hidden;
+}
+.heroContainer {
+    border: none;
+    width: 100%;
+    height: 911px;
+    overflow: hidden;
+    position: relative;
+
+}
+  
+.heroContainer img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -350px;
+    filter: brightness(90%);
+}
+  
+.textOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.textOverlay h1, .textOverlay p {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.heroTitle{
+    font-size: 5rem;
+}
+
+/******NAVBAR******/
+
+.navbar {
+    width:  90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.navbar-logo img {
+    height: 90px;
+}
+
+.navbar-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-items li {
+    margin-left: 30px;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+
+.special-button {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #3D5243;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.special-button i {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.special-button:hover {
+    background-color: #a33d07;
+}
+
+.navitem{
+    position: relative;
+}
+
+.navitem:hover{
+    color: #fff;
+}
+
+.navitem::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: all .5s;
+}
+
+.navitem:hover::before{
+    width: 100%;
+}
+
+/******WHERETAKE******/
+.whereTake {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #3D5243;
+    border-radius: 2rem;
+    padding: 8px 20px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 12rem;
+    height: 3rem;
+    transition: width 2s, height 2s, background-color 0.5s, box-shadow 0.5s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.whereTake:hover {
+    background-color: #495135; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    width: 20rem;
+    height: 4rem;
+}
+
+.whereText {
+    text-align: center;
+    margin-left: 10px;
+    font-size: 1rem;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whereText::before {
+    content: "Where was this?";
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.whereTake:hover .whereText::before {
+    opacity: 0;
+}
+
+.whereText::after {
+    content: "Taken on a trip to Landmannlaugar, Iceland with Deconnecting";
+    position: absolute;
+    transition: opacity 0.25s ease-in-out;
+    opacity: 0;
+}
+
+.whereTake:hover .whereText::after {
+    opacity: 1;
+}
+
+.whereTake i {
+    margin-right: 10px;
+    transition: transform 0.5s ease-in-out;
+    font-size: 1.2rem;
+}
+
+.whereTake:hover i {
+    transform: scale(1.1);
+}
