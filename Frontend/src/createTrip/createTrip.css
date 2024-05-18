@@ -1,0 +1,144 @@
+.createTripContainer {
+    height: 110vh;
+    background-color: #000106;
+    backdrop-filter: blur(100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createTripMain {
+    height: 40rem;
+    width: 50rem;
+    background-color: #1E1E23;
+    border-radius: 3rem;
+    z-index: 99;
+}
+
+.container {
+    position: relative;
+}
+
+.headerAndMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+    z-index: 1;
+}
+
+.createHeader {
+    color: white;
+    font-size: 3rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding-bottom: 3rem;
+}
+
+.header h1 {
+    margin-bottom: 0;
+}
+
+.special {
+    color: gold;
+}
+
+
+/******DYNAMIC (uh oh) ********/
+.mainOutline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mainHeader {
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 5rem;
+}
+.startButton {
+    font-size: 2rem;
+    font-family: 'Archivo';
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    transition: background 0.4s ease;
+    background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+    width: 80%;
+    height: 15rem;
+    margin-top: 10rem;
+}
+
+.startButton:hover {
+    background: linear-gradient(
+        157.81deg,
+        #def9fa -43.27%,
+        #bef3f5 -21.24%,
+        #9dedf0 12.19%,
+        #7de7eb 29.82%,
+        #5ce1e6 51.94%,
+        #33bbcf 90.29%
+    );
+    transition: background 0.4s ease;
+}
+
+.buttonHolder {
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+.buttonHolder2 {
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.startButtons {
+    font-size: 2rem;
+    font-family: 'Archivo';
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    transition: background 0.4s ease;
+    background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+    width: 40%;
+    height: 15rem;
+    margin-top: 10rem;
+}
+
+.startButtons:hover {
+    background: linear-gradient(
+        157.81deg,
+        #def9fa -43.27%,
+        #bef3f5 -21.24%,
+        #9dedf0 12.19%,
+        #7de7eb 29.82%,
+        #5ce1e6 51.94%,
+        #33bbcf 90.29%
+    );
+    transition: background 0.4s ease;
+}
+
+.budgetContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.budgetInput {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+    width: 80%;
+    text-align: center;
+}
