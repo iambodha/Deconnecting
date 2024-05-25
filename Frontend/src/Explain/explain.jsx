@@ -15,7 +15,7 @@ function Explain() {
                     <h2 className='bigHeader'>Deconnecting is...</h2>
                     <div className='smallPoint'>
                         <img src={icon1} alt='Icon 1' className='icon'/>
-                        <p>Small Point 1</p>
+                        <p>A sustainable & tailor-made trip creation tool</p>
                     </div>
                     <div className='smallPoint'>
                         <img src={icon2} alt='Icon 2' className='icon'/>

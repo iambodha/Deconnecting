@@ -19,6 +19,7 @@ function Explore() {
 
     const handleOnDown = (e) => {
       track.dataset.mouseDownAt = e.clientX || e.touches[0].clientX;
+      // track.dataset.mouseUpAt = e.clientY || e.touches[0].clientY;
     };
 
     const handleOnUp = () => {
