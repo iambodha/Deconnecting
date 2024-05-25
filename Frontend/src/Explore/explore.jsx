@@ -5,11 +5,11 @@ import card2 from '../assets/card2.jpg';
 import card3 from '../assets/card3.jpg';
 import card4 from '../assets/card4.jpg';
 import card5 from '../assets/card5.jpg';
-import icelandIcon from '../assets/iceland.png'; // Assuming a placeholder country icon
-import germanIcon from '../assets/germany.png'; // Assuming a placeholder country icon
-import italyIcon from '../assets/italy.png'; // Assuming a placeholder country icon
-import finlandIcon from '../assets/finland.png'; // Assuming a placeholder country icon
-import ukIcon from '../assets/uk.png'; // Assuming a placeholder country icon
+import icelandIcon from '../assets/iceland.png'; // country icon for the mini icons at the top
+import germanIcon from '../assets/germany.png'; // country icon for the mini icons at the top
+import italyIcon from '../assets/italy.png'; // country icon for the mini icons at the top
+import finlandIcon from '../assets/finland.png'; // country icon for the mini icons at the top
+import ukIcon from '../assets/uk.png'; // country icon for the mini icons at the top
 
 function Explore() {
   const trackRef = useRef(null);

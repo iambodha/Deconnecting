@@ -62,6 +62,12 @@ function CreateTrip() {
                 </div>
             </div>
         );
+    } else if (currentState === 'budgetInput') {
+        content = (
+            <div className="mainOutline">
+                <h1 className="archivo createHeader"></h1>
+            </div>
+        )
     }
 
     // handle what happens
