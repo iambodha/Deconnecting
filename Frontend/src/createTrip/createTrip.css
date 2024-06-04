@@ -1,5 +1,5 @@
 .createTripContainer {
-    height: 110vh;
+    height: fit-content;
     background-color: #0F0F0F;
     backdrop-filter: blur(100px);
     display: flex;
@@ -17,6 +17,7 @@
 
 .container {
     position: relative;
+
 }
 
 .headerAndMain {
@@ -30,6 +31,8 @@
 .createHeader {
     color: white;
     font-size: 3rem;
+    padding-bottom: 5rem;
+    text-align: center;
 }
 
 .header {

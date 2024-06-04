@@ -16,8 +16,7 @@ function CreateTrip() {
     if (currentState === 'click') {
         content = (
         <div class="sparkle-button">
-
-            <button>
+            <button onClick={() => setCurrentState('start')}>
             <span class="spark"></span>
             <span class="backdrop"></span>
             <svg class="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,61 +86,73 @@ function CreateTrip() {
     
     else if (currentState === 'start') {
         content = (
-            <div className="mainOutline">
-                <h1 className='archivo mainHeader'>Get Started</h1>
-                <button className='startButton' onClick={() => setCurrentState('chooseGroupType')}>Start</button>
+            <div className="createTripMain">
+                <div className="mainOutline">
+                    <h1 className='archivo mainHeader'>Get Started</h1>
+                    <button className='startButton' onClick={() => setCurrentState('chooseGroupType')}>Start</button>
+                </div>
             </div>
         );
     }   
     
     else if (currentState === 'chooseGroupType') {
         content = (
-            <div className="mainOutline">
-                <h1 className='archivo mainHeader'>Choose Group Type</h1>
-                <div className='buttonHolder'>
-                    <button className='startButtons' onClick={() => setCurrentState('typeGroup')}>Group <br />(WIP)</button>
-                    <button className='startButtons' onClick={() => setCurrentState('typeSolo')}>Solo</button>
+            <div className="createTripMain">            
+                <div className="mainOutline">
+                    <h1 className='archivo mainHeader'>Choose Group Type</h1>
+                    <div className='buttonHolder'>
+                        <button className='startButtons' onClick={() => setCurrentState('typeGroup')}>Group <br />(WIP)</button>
+                        <button className='startButtons' onClick={() => setCurrentState('typeSolo')}>Solo</button>
+                    </div>
                 </div>
             </div>
         );
     } else if (currentState === 'typeGroup') {
         content = (
-            <div className="mainOutline">
-                <h1 className='archivo createHeader'>TESTGROUP</h1>
-                <button className='startButton' onClick={() => setCurrentState('start')}>BACK TO START</button>
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>TESTGROUP</h1>
+                    <button className='startButton' onClick={() => setCurrentState('click')}>BACK TO START</button>
+                </div>
             </div>
         );
     } else if (currentState === 'typeSolo') {
         content = (
-            <div className="mainOutline">
-                <h1 className='archivo createHeader'>TESTSOLO</h1>
-                <div className='buttonHolder2'>
-                    <button className='startButtons' onClick={() => setCurrentState('enterBudget')}>Enter Budget</button>
-                    <button className='startButtons' onClick={() => setCurrentState('start')}>Back</button>
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>TESTSOLO</h1>
+                    <div className='buttonHolder2'>
+                        <button className='startButtons' onClick={() => setCurrentState('enterBudget')}>Enter Budget</button>
+                        <button className='startButtons' onClick={() => setCurrentState('start')}>Back</button>
+                    </div>
                 </div>
             </div>
         );
     } else if (currentState === 'enterBudget') {
         content = (
-            <div className="mainOutline">
-                <h1 className='archivo createHeader'>Budget</h1>
-                <h2 className='archivo'>What is your budget?</h2>
-                <div className='budgetContainer'>
-                    <input
-                        type="text"
-                        value={budget}
-                        onChange={(e) => setBudget(e.target.value)}
-                        placeholder="Enter your budget"
-                        className="budgetInput"
-                    />
-                    <button className='startButtons' onClick={() => setCurrentState('start')}>Submit</button>
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>Budget</h1>
+                    <h2 className='archivo'>What is your budget?</h2>
+                    <div className='budgetContainer'>
+                        <input
+                            type="text"
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
+                            placeholder="Enter your budget"
+                            className="budgetInput"
+                        />
+                        <button className='startButtons' onClick={() => setCurrentState('start')}>Submit</button>
+                    </div>
                 </div>
             </div>
         );
     } else if (currentState === 'budgetInput') {
         content = (
-            <div className="mainOutline">
-                <h1 className="archivo createHeader"></h1>
+            <div className="createTripMain"> 
+                <div className="mainOutline">
+                    <h1 className="archivo createHeader"></h1>
+                </div>
             </div>
         )
     }
@@ -165,10 +176,8 @@ function CreateTrip() {
                 <div className="headerAndMain">
                     <div className="header">
                         <h1 className='archivo createHeader'>Create your <em>very own</em> adventure now</h1>
-                    </div>
-                    <div className="createTripMain box-shadow">
+                    </div>  
                         {content} {/* Render content based on current state */}
-                    </div>
                 </div>
             </div>
         </div>
