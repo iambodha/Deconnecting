@@ -1,6 +1,6 @@
 .createTripContainer {
     height: 110vh;
-    background-color: #000106;
+    background-color: #0F0F0F;
     backdrop-filter: blur(100px);
     display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@
 .createTripMain {
     height: 40rem;
     width: 50rem;
-    background-color: #1E1E23;
+    background-color: #1F1F1F;
     border-radius: 3rem;
     z-index: 99;
 }
@@ -110,19 +110,6 @@
     width: 40%;
     height: 15rem;
     margin-top: 10rem;
-}
-
-.startButtons:hover {
-    background: linear-gradient(
-        157.81deg,
-        #def9fa -43.27%,
-        #bef3f5 -21.24%,
-        #9dedf0 12.19%,
-        #7de7eb 29.82%,
-        #5ce1e6 51.94%,
-        #33bbcf 90.29%
-    );
-    transition: background 0.4s ease;
 }
 
 .budgetContainer {
