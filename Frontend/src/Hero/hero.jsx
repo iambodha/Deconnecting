@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './hero.css';
-import heroImage from '../assets/bghero.jpg'; // import hero image (dont forget to implement changing each day)
+import heroImage from '../assets/bgimage2.jpg'; // import hero image (dont forget to implement changing each day)
 import logoImage from '../assets/Deconnectingtextlogo-removebg-preview.png';
 
 function Hero() {
@@ -18,7 +18,7 @@ function Hero() {
           <li className='archivo navitem'>About Us</li>
           <div className='special-button'>
             <i className="uil uil-envelope-search"></i>
-            <span className='archivo special'>Create!</span>
+            <li className='archivo special'>Explore</li>
           </div>
         </ul>
       </nav>
@@ -26,7 +26,7 @@ function Hero() {
       <div className='heroContainer'>
         <img src={heroImage} alt="Hero Image" />
         <div className='textOverlay'>
-          <h1 className='heroTitle lora'>Find unforgettable trips</h1>
+          <h1 className='heroTitle archivo'>Find unforgettable trips</h1>
           <p>Go to places you would have never thought about with Deconnecting.</p>
         </div>
         <div className='whereTake'>

@@ -15,7 +15,7 @@ p, .archivo{
     position: relative;
 
 }
-  
+
 .heroContainer img {
     width: 100%;
     height: auto;
@@ -84,7 +84,7 @@ p, .archivo{
     justify-content: center;
     padding: 10px 20px;
     border-radius: 20px;
-    background-color: #3D5243;
+    background-color: #0B202A;
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;
     margin-left: 30px;
@@ -93,11 +93,10 @@ p, .archivo{
 .special-button i {
     color: white;
     font-size: 1.5rem;
-    margin-right: 10px;
 }
 
 .special-button:hover {
-    background-color: #a33d07;
+    background-color: #688995;
 }
 
 .navitem{
@@ -130,7 +129,7 @@ p, .archivo{
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background-color: #3D5243;
+    background-color: #0B202A;
     border-radius: 2rem;
     padding: 8px 20px;
     color: white;
@@ -143,7 +142,7 @@ p, .archivo{
 }
 
 .whereTake:hover {
-    background-color: #495135; 
+    background-color: #688995; 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     width: 20rem;
     height: 4rem;
