@@ -81,8 +81,6 @@ function Explore() {
 
   return (
     <div className='exploreContainerMain'>
-      <div class="header__glow"></div>
-      <div class="header__glow-4"></div>
       <h1 className='exploreText archivo'>Have a look at our <em>favourite</em> trips</h1>
       <h2 className='archivo'>with <em>flexible</em> pricing</h2>
       <div className='exploreContent'>
