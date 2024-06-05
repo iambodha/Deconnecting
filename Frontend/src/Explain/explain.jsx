@@ -9,7 +9,7 @@ import explainImg from '../assets/explain1.jpg'
 function Explain() {
     return (
         <div className='explainContainer'>
-            <h1 className='headertext archivo'>What's Deconnecting?</h1>
+            <h1 className='headertext archivo'>What is Deconnecting?</h1>
             <div className="explainMain">
                 <div className='explainLeft'>
                     <h2 className='bigHeader'>Deconnecting is...</h2>

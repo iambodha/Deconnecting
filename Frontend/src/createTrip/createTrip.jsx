@@ -3,21 +3,45 @@ import '../Hero/hero.css';
 import './createTrip.css';
 import './gradients.css';
 import './button.css';
+import './loader.css'
 import './button.js';
 
 function CreateTrip() {
     // manage current state
     const [currentState, setCurrentState] = useState('click');
+    const [loading, setLoading] = useState(false);
     const [groupType, setGroupType] = useState('');
     const [budget, setBudget] = useState('');
 
     // MESSY SHIT!!!!!!!
     let content;
-    if (currentState === 'click') {
+    if (loading) {
+        content = (
+                <div className="banter-loader">
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                </div>
+        );
+    }
+
+    else if (currentState === 'click') {
         content = (
         <div className="mainOutline">
             <div class="sparkle-button">
-                <button onClick={() => setCurrentState('start')}>
+            <button onClick={() => {
+                        setLoading(true);
+                        setTimeout(() => {
+                            setLoading(false);
+                            setCurrentState('start');
+                        }, 2000); // 4 sec delay
+                    }}>
                 <span class="spark"></span>
                 <span class="backdrop"></span>
                 <svg class="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
