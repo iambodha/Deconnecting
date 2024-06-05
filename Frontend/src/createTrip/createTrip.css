@@ -1,6 +1,6 @@
 .createTripContainer {
     padding-top: 5rem;  
-    height: fit-content;
+    height: fit-content + 2rem;
     background-color: #0F0F0F;
     backdrop-filter: blur(100px);
     display: flex;
