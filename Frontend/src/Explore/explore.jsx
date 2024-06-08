@@ -19,7 +19,6 @@ function Explore() {
 
     const handleOnDown = (e) => {
       track.dataset.mouseDownAt = e.clientX || e.touches[0].clientX;
-      // track.dataset.mouseUpAt = e.clientY || e.touches[0].clientY;
     };
 
     const handleOnUp = () => {
@@ -43,7 +42,7 @@ function Explore() {
 
       track.animate(
         {
-          transform: `translate(${nextPercentage}%, -50%)`,
+          transform: `translate(${nextPercentage}%, 0%)`,
         },
         { duration: 3200, fill: 'forwards' }
       );

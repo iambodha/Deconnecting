@@ -1,19 +1,24 @@
-h1, h2, h3, h4, .lora{
-    font-family:'Lora'
+body{
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 p, .archivo{
     font-family: 'Archivo'
 }
 .heromainContainer{
-    overflow: hidden;
+    width: 100%;
 }
 .heroContainer {
     border: none;
     width: 100%;
-    height: 911px;
+    height: 100vh;
     overflow: hidden;
     position: relative;
-
 }
 
 .heroContainer img {
@@ -26,7 +31,7 @@ p, .archivo{
 }
   
 .textOverlay {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
