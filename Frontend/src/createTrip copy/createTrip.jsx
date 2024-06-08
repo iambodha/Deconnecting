@@ -9,14 +9,39 @@ import './button.js';
 function CreateTrip() {
     // manage current state
     const [currentState, setCurrentState] = useState('click');
-    let content
+    const [loading, setLoading] = useState(false);
+    const [groupType, setGroupType] = useState('');
+    const [budget, setBudget] = useState('');
 
-    if (currentState === 'click') {
+    // MESSY SHIT!!!!!!!
+    let content;
+    if (loading) {
+        content = (
+                <div className="banter-loader">
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                    <div className="banter-loader__box"></div>
+                </div>
+        );
+    }
+
+    else if (currentState === 'click') {
         content = (
         <div className="mainOutline">
-            <a href="#">
             <div class="sparkle-button">
-            <button>
+            <button onClick={() => {
+                        setLoading(true);
+                        setTimeout(() => {
+                            setLoading(false);
+                            setCurrentState('start');
+                        }, 2000); // 4 sec delay
+                    }}>
                 <span class="spark"></span>
                 <span class="backdrop"></span>
                 <svg class="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,10 +106,105 @@ function CreateTrip() {
                 </svg>
                 </span>
             </div>
-            </a>
         </div>
         );
     }   
+    
+    else if (currentState === 'start') {
+        content = (
+            <div className="createTripMain">
+                <div className="mainOutline">
+                    <h1 className='archivo mainHeader'>Get Started</h1>
+                    <button className='startButton' onClick={() => setCurrentState('chooseGroupType')}>
+                        <h1 className='archivo buttonText'>Start</h1>
+                    </button>
+                </div>
+            </div>
+        );
+    }   
+    
+    else if (currentState === 'chooseGroupType') {
+        content = (
+            <div className="createTripMain">            
+                <div className="mainOutline">
+                    <h1 className='archivo mainHeader'>Choose Group Type</h1>
+                    <div className='buttonHolder'>
+                        <button className='startButtons' onClick={() => setCurrentState('typeGroup')}>
+                        <h1 className='archivo buttonText'>Group (WIP)</h1>
+                        </button>
+                        <button className='startButtons' onClick={() => setCurrentState('typeSolo')}>
+                        <h1 className='archivo buttonText'>Solo</h1>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (currentState === 'typeGroup') {
+        content = (
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>TESTGROUP</h1>
+                    <button className='startButton' onClick={() => setCurrentState('click')}>
+                    <h1 className='archivo buttonText'>Back to Start</h1>
+                    </button>
+                </div>
+            </div>
+        );
+    } else if (currentState === 'typeSolo') {
+        content = (
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>Solo Trip Creator</h1>
+                    <div className='buttonHolder2'>
+                        <button className='startButtons' onClick={() => setCurrentState('enterBudget')}>
+                        <h1 className='archivo buttonText'>Enter Budget</h1>
+                        </button>
+                        <button className='startButtons' onClick={() => setCurrentState('start')}>
+                        <h1 className='archivo buttonText'>Back</h1>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (currentState === 'enterBudget') {
+        content = (
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <h1 className='archivo createHeader'>Tell us your budget</h1>
+                    <div className='budgetContainer'>
+                        <input type="text"
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
+                            placeholder="Enter your budget"
+                            className="budgetInput" />
+                        <button className='budgetButton' onClick={() => setCurrentState('start')}>Submit</button>
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (currentState === 'budgetInput') {
+        content = (
+            <div className="createTripMain"> 
+                <div className="mainOutline">
+                    <h1 className="archivo createHeader"></h1>
+                </div>
+            </div>
+        )
+    }
+
+    // handle what happens
+    // idk api dings bums
+    useEffect(() => {
+        // fetch('https://api.example.com/group?type=${groupType}')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //      // api detail output
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching data:', error);
+        //     });
+    }, [groupType]);
+
     return(
         <div className='createTripContainer'>
             <div className="container">

@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Hero from './Hero/hero.jsx'
-import Explore from './Explore/explore.jsx'
 import Explain from './Explain/explain.jsx'
 import CreateTrip from './createTrip/createTrip.jsx'
 import Footer from './footer/footer.jsx'
@@ -11,6 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Hero />
     <Explain />
+
     <CreateTrip />
     <Footer />
   </React.StrictMode>,

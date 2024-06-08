@@ -1,15 +1,15 @@
 import React from 'react';
 import '../Hero/hero.css';
 import './explain.css';
-import icon1 from '../assets/icon1.png'
-import icon2 from '../assets/icon1.png'
-import icon3 from '../assets/icon1.png'
-import explainImg from '../assets/explain1.jpg'
+import icon1 from '../assets/icon1.png';
+import icon2 from '../assets/icon1.png';
+import icon3 from '../assets/icon1.png';
+import explainImg from '../assets/explain1.jpg';
 
 function Explain() {
     return (
         <div className='explainContainer'>
-            <h1 className='headertext archivo'>What is Deconnecting?</h1>
+            <h1 className='headerText archivo'>What is Deconnecting?</h1>
             <div className="explainMain">
                 <div className='explainLeft'>
                     <h2 className='bigHeader'>Deconnecting is...</h2>
