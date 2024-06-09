@@ -14,7 +14,7 @@ function CreateTrip() {
     if (currentState === 'click') {
         content = (
         <div className="mainOutline">
-            <a href="#">
+            <a href="tripCreator">
             <div class="sparkle-button">
             <button>
                 <span class="spark"></span>
@@ -90,7 +90,7 @@ function CreateTrip() {
             <div className="container">
                 <div className="headerAndMain">
                     <div className="header">
-                        <h1 className='archivo createHeader'>Create your <em>very own</em> adventure now</h1>
+                        <h1 className='archivo mainHeader'>Create your <em>very own</em> adventure now</h1>
                     </div>  
                         {content} {/* Render content based on current state */}
                 </div>

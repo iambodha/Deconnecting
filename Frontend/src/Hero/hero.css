@@ -21,15 +21,29 @@ p, .archivo{
     position: relative;
 }
 
-.heroContainer img {
+.heroImage {
     width: 100%;
     height: auto;
     position: absolute;
     bottom: 0;
     margin-bottom: -350px;
     filter: brightness(90%);
+
+    animation: hero-Image linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+
+@keyframes hero-Image{
+    25% {opacity: 1;}
+    85%, 100% {opacity: 0; scale: 3}
 }
   
+@keyframes fade-out{
+    to { opacity: 0}
+}
+
+
 .textOverlay {
     position: relative;
     top: 50%;
@@ -37,6 +51,10 @@ p, .archivo{
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+
+    animation: fade-out linear;
+    animation-timeline: view();
+    animation-range: exit -200px;
 }
 
 .textOverlay h1, .textOverlay p {
@@ -125,73 +143,4 @@ p, .archivo{
 
 .navitem:hover::before{
     width: 100%;
-}
-
-/******WHERETAKE******/
-.whereTake {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: #0B202A;
-    border-radius: 2rem;
-    padding: 8px 20px;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 12rem;
-    height: 3rem;
-    transition: width 2s, height 2s, background-color 0.5s, box-shadow 0.5s;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.whereTake:hover {
-    background-color: #688995; 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    width: 20rem;
-    height: 4rem;
-}
-
-.whereText {
-    text-align: center;
-    margin-left: 10px;
-    font-size: 1rem;
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.whereText::before {
-    content: "Where was this?";
-    position: absolute;
-    transition: opacity 0.2s ease-in-out;
-    opacity: 1;
-}
-
-.whereTake:hover .whereText::before {
-    opacity: 0;
-}
-
-.whereText::after {
-    content: "Taken on a trip to Landmannlaugar, Iceland with Deconnecting";
-    position: absolute;
-    transition: opacity 0.25s ease-in-out;
-    opacity: 0;
-}
-
-.whereTake:hover .whereText::after {
-    opacity: 1;
-}
-
-.whereTake i {
-    margin-right: 10px;
-    transition: transform 0.5s ease-in-out;
-    font-size: 1.2rem;
-}
-
-.whereTake:hover i {
-    transform: scale(1.1);
 }

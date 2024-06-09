@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #fff;
+}
+
+.icon-bar {
+    display: flex;
+    background-color: grey; /* Darker grey background */
+    border-radius: 2rem;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: #333; /* Darker icon background */
+    margin: 0 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    transition: background-color 0.3s, width 0.3s, height 0.3s;
+}
+
+.icon i {
+    font-size: 1.5rem;
+    color: white; /* White icon color */
+}
+
+.icon:hover {
+    background-color: #444;
+}
+
+.icon.active {
+    background-color: #555; /* Lighter background for the active icon */
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: -0.5rem 0.3rem;
+}
+
+.icon-bar::before,
+.icon-bar::after {
+    content: '';
+    display: block;
+    width: 0.5rem;
+    height: 3.5rem;
+    background-color: grey; /* Same as icon bar background */
+    border-radius: 1rem;
+    margin: auto 0;
+}
+
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-input {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.flatpickr-calendar {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+}
+
+.flatpickr-day {
+    background-color: #333;
+    color: white;
+}
+
+.flatpickr-day:hover {
+    background-color: #444;
+}
+
+.flatpickr-day.today {
+    background-color: #555;
+    color: white;
+}
+
+.flatpickr-day.selected {
+    background-color: #ff6347;
+    color: white;
+}

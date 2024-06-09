@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '../Hero/hero.css';
-import './createTrip.css';
+import './createTrip2.css';
 import './gradients.css';
 import './button.css';
 import './loader.css'
-import './button.js';
+import './button.js'
 
-function CreateTrip() {
+import budgetTrack from '../createTripassets/budget.png'
+import calendarTrack from '../createTripassets/calendar.png'
+
+function CreateTrip2() {
     // manage current state
     const [currentState, setCurrentState] = useState('click');
     const [loading, setLoading] = useState(false);
@@ -127,10 +130,17 @@ function CreateTrip() {
         content = (
             <div className="createTripMain">            
                 <div className="mainOutline">
+                    <div className="topSection">
+                        <a className='backIcon' onClick={() => setCurrentState('start')}><i class="uil uil-angle-left-b"></i></a>
+                        <div className="apiHolder">
+                        <i class="uil uil-flask"></i>
+                        <p>Deconnecting API v0.12 Beta</p>
+                        </div>
+                    </div>
                     <h1 className='archivo mainHeader'>Choose Group Type</h1>
                     <div className='buttonHolder'>
                         <button className='startButtons' onClick={() => setCurrentState('typeGroup')}>
-                        <h1 className='archivo buttonText'>Group (WIP)</h1>
+                        <h1 className='archivo buttonText'>Group</h1>
                         </button>
                         <button className='startButtons' onClick={() => setCurrentState('typeSolo')}>
                         <h1 className='archivo buttonText'>Solo</h1>
@@ -154,42 +164,90 @@ function CreateTrip() {
         content = (
             <div className="createTripMain">   
                 <div className="mainOutline">
-                    <h1 className='archivo createHeader'>Solo Trip Creator</h1>
-                    <div className='buttonHolder2'>
-                        <button className='startButtons' onClick={() => setCurrentState('enterBudget')}>
-                        <h1 className='archivo buttonText'>Enter Budget</h1>
-                        </button>
-                        <button className='startButtons' onClick={() => setCurrentState('start')}>
-                        <h1 className='archivo buttonText'>Back</h1>
-                        </button>
+                <div className="topSection">
+                        <a className='backIcon' onClick={() => setCurrentState('start')}><i class="uil uil-angle-left-b"></i></a>
+                        <div className="apiHolder">
+                        <i class="uil uil-flask"></i>
+                        <p>Deconnecting API v0.12 Beta</p>
+                        </div>
+                    </div>
+                    <div className="centerSection">
+                        <div class="icon-bar">
+                            <div class="icon active">
+                                <i class="uil uil-dollar-sign"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-calendar-alt"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-map-marker"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-clock"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-car"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-bed"></i>
+                            </div>
+                         </div>
+                    </div>
+                    <div className='budgetContainer'>
+                        <input type="text"
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
+                            placeholder="Your Budget (EUR)"
+                            className="budgetInput" />
+                        <button className='budgetButton' onClick={() => setCurrentState('calendar')}>Next</button>
                     </div>
                 </div>
             </div>
         );
-    } else if (currentState === 'enterBudget') {
+    } else if (currentState === 'calendar') {
         content = (
             <div className="createTripMain">   
                 <div className="mainOutline">
-                    <h1 className='archivo createHeader'>Tell us your budget</h1>
+                <div className="topSection">
+                        <a className='backIcon' onClick={() => setCurrentState('typeSolo')}><i class="uil uil-angle-left-b"></i></a>
+                        <div className="apiHolder">
+                        <i class="uil uil-flask"></i>
+                        <p>Deconnecting API v0.12 Beta</p>
+                        </div>
+                    </div>
+                    <div className="centerSection">
+                        <div class="icon-bar">
+                            <div class="icon">
+                                <i class="uil uil-dollar-sign"></i>
+                            </div>
+                            <div class="icon active">
+                                <i class="uil uil-calendar-alt"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-map-marker"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-clock"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-car"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-bed"></i>
+                            </div>
+                         </div>
+                    </div>
                     <div className='budgetContainer'>
                         <input type="text"
                             value={budget}
                             onChange={(e) => setBudget(e.target.value)}
                             placeholder="Enter your budget"
                             className="budgetInput" />
-                        <button className='budgetButton' onClick={() => setCurrentState('start')}>Submit</button>
+                        <button className='budgetButton' onClick={() => setCurrentState('test')}>Next</button>
                     </div>
                 </div>
             </div>
         );
-    } else if (currentState === 'budgetInput') {
-        content = (
-            <div className="createTripMain"> 
-                <div className="mainOutline">
-                    <h1 className="archivo createHeader"></h1>
-                </div>
-            </div>
-        )
     }
 
     // handle what happens
@@ -210,7 +268,7 @@ function CreateTrip() {
             <div className="container">
                 <div className="headerAndMain">
                     <div className="header">
-                        <h1 className='archivo createHeader'>Create your <em>very own</em> adventure now</h1>
+                        <h1 className='archivo mainHeader'>Create your <em>very own</em> adventure now</h1>
                     </div>  
                         {content} {/* Render content based on current state */}
                 </div>
@@ -219,4 +277,4 @@ function CreateTrip() {
     );
 }
 
-export default CreateTrip;
+export default CreateTrip2;

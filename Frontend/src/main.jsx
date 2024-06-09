@@ -4,6 +4,7 @@ import Hero from './Hero/hero.jsx'
 import Explore from './Explore/explore.jsx'
 import Explain from './Explain/explain.jsx'
 import CreateTrip from './createTrip/createTrip.jsx'
+import CreateTrip2 from './tripcreator/createTrip2.jsx'
 import Footer from './footer/footer.jsx'
 import './index.css'
 
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Explain />
     <Explore />
     <CreateTrip />
+    <CreateTrip2 />
     <Footer />
   </React.StrictMode>,
 )
