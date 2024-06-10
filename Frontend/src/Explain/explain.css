@@ -44,13 +44,6 @@
     margin-bottom: 1rem;
 }
 
-.icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 1rem;
-    filter: grayscale(1) invert(1);
-}
-
 .explainRight {
     padding: 2rem;
     box-sizing: border-box;

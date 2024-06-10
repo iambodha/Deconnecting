@@ -1,47 +1,247 @@
 body {
+    font-family: 'Archivo', sans-serif;
+}
+
+/*********************************SECTION CONTAINER*********************************/
+.createTripContainer {
+    padding-top: 5rem;
+    height: fit-content;
+    background-color: #0F0F0F;
+    backdrop-filter: blur(100px);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #fff;
+    background-image: url('../assets/pngpattern.webp');
+    background-size: cover;
+    background-position: center;
+    transition: background-size 0.4s ease;
+    background-size: 30%;
 }
+
+/*********************************MAINCONTAINER*********************************/
+.createTripMain {
+    height: fit-content;
+    width: 100%;
+    max-width: 50rem;
+    background-color: #111320;
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    padding: 2rem;
+    margin: 2rem;
+    transition: 0.4s ease;
+}
+
+/*********************************MAINOUTLINE*********************************/
+.mainOutline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.4s ease;
+}
+
+.mainHeader {
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+.mainTitle{
+    margin-top: 2.5rem;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 0rem;
+}
+/*********************************TOP SECTION*********************************/
+.topSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.backIcon {
+    color: rgb(102, 102, 102);
+    font-size: 3rem;
+    background-color: #333333;
+    border-radius: 50%;
+    transition: 0.4s ease all;
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backIcon:hover {
+    color: white;
+    background-color: #696969;
+    box-shadow: 0 0 0 .2vw skyblue;
+}
+
+.apiHolder {
+    display: flex;
+    align-items: center;
+    background-color: #333333;
+    border-radius: 3rem;
+    transition: 0.4s ease all;
+    height: 4rem;
+    padding: 0 1rem;
+    color: white;
+}
+
+.apiHolder:hover{
+    box-shadow: 0 0 0 .2vw skyblue;
+}
+
+.apiHolder i {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+}
+
+.apiHolder p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/*********************************BUTTONS*********************************/
+.generateButton{
+    position: absolute;
+    left: 50%;
+}
+
+.buttonHolder {
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.buttonHolder2 {
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.startButtons {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    font-family: 'Archivo';
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    transition: 0.4s ease;
+    width: 40%;
+    height: 15rem;
+    margin-top: 10rem;
+}
+
+.startButton {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.8rem;
+    font-family: 'Archivo';
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    transition: 0.4s ease;
+    width: 80%;
+    height: 15rem;
+    margin-top: 10rem;
+}
+
+.buttonText {
+    padding-top: 2rem;
+}
+
+/*********************************BUDGET INPUT*********************************/
+.budgetContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.budgetInput {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    font-size: 1.8vw;
+    color: #fff;
+    background-color: rgb(28, 28, 30);
+    box-shadow: 0 0 .8vw rgba(0, 0, 0, 0.5), 0 0 0 .3vw transparent;
+    border-radius: 0.8vw;
+    border: none;
+    outline: none;
+    padding: 1vw;
+    max-width: 350px;
+    transition: .4s;
+}
+
+.budgetInput:hover {
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
+}
+
+.budgetInput:focus {
+    box-shadow: 0 0 0 .2vw skyblue;
+}
+
+.budgetButton {
+    color: white;
+    margin-top: 1rem;
+}
+
+/*********************************ICON BAR*********************************/
 
 .icon-bar {
     display: flex;
-    background-color: grey; /* Darker grey background */
+    background-color: #333;
     border-radius: 2rem;
     padding: 0.5rem;
-    margin-bottom: 2rem;
 }
 
 .icon {
     width: 3.5rem;
     height: 3.5rem;
-    background-color: #333; /* Darker icon background */
+    background-color: #444;
     margin: 0 0.3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
     transition: background-color 0.3s, width 0.3s, height 0.3s;
+    transition: 0.4s ease all;
 }
 
 .icon i {
     font-size: 1.5rem;
-    color: white; /* White icon color */
+    color: white;
 }
 
 .icon:hover {
-    background-color: #444;
+    background-color: #555;
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
 }
 
 .icon.active {
-    background-color: #555; /* Lighter background for the active icon */
+    background-color: grey;
     width: 4.5rem;
     height: 4.5rem;
     margin: -0.5rem 0.3rem;
+    transition: 0.4s ease all;
+}
+
+.icon.active:hover {
+    box-shadow: 0 0 0 .2vw skyblue;
 }
 
 .icon-bar::before,
@@ -50,49 +250,126 @@ body {
     display: block;
     width: 0.5rem;
     height: 3.5rem;
-    background-color: grey; /* Same as icon bar background */
+    background-color: #333;
     border-radius: 1rem;
     margin: auto 0;
 }
 
-.calendar-container {
+/*********************************CALENDAR*********************************/
+
+.calendar {
+    margin-top: 3rem;
+    font-family: 'Archivo';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    padding: 2rem;
+    border-radius: 1rem;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.calendar-header a {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.calendar-header a:hover {
+    background-color: #555;
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
+}
+
+.calendar-header span {
+    font-size: 1.5rem;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+.day {
+    background-color: #444;
+    color: white;
+    width: 4rem;
+    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.date-input {
-    background-color: #333;
-    color: white;
-    border: none;
     border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    outline: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: ease 0.4s;
 }
 
-.flatpickr-calendar {
-    background-color: grey;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-}
-
-.flatpickr-day {
-    background-color: #333;
-    color: white;
-}
-
-.flatpickr-day:hover {
-    background-color: #444;
-}
-
-.flatpickr-day.today {
+.day:hover {
     background-color: #555;
-    color: white;
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
 }
 
-.flatpickr-day.selected {
-    background-color: #ff6347;
+.day.selected-start,
+.day.selected-end {
+    background-color: #007BFF;
+    box-shadow: 0 0 0 .2vw skyblue;
+}
+
+.day.in-range {
+    background-color: #808080;
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
+}
+/*********************************LOCATION*********************************/
+.locationContainer{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    font-size: 1.8vw;
+    color: #fff;
+    background-color: rgb(28, 28, 30);
+    box-shadow: 0 0 .8vw rgba(0, 0, 0, 0.5), 0 0 0 .3vw transparent;
+    border-radius: 0.8vw;
+    border: none;
+    outline: none;
+    padding: 1vw;
+    max-width: 40rem;
+    transition: .4s;
+    margin-bottom: 1.2rem;
+}
+
+.locationInput {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    font-size: 1.8vw;
+    color: #fff;
+    background-color: rgb(28, 28, 30);
+    border: none;
+    outline: none;
+    transition: .4s;
+    max-width: 20rem;
+}
+
+.locationContainer:hover {
+    box-shadow: 0 0 0 .2vw rgba(135, 207, 235, 0.186);
+}
+
+.locationContainer:focus {
+    box-shadow: 0 0 0 .2vw skyblue;
+}
+
+.locationMarker{
     color: white;
+    font-size: 2rem;
 }

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../Hero/hero.css';
 import './createTrip2.css';
-import './gradients.css';
 import './button.css';
 import './loader.css'
 import './button.js'
 
-import budgetTrack from '../createTripassets/budget.png'
-import calendarTrack from '../createTripassets/calendar.png'
+import DateRangePicker from '../DateRangePicker/daterangepicker.jsx';
+import MapComponent from '../MapComponent/mapcomponent.jsx'
 
 function CreateTrip2() {
     // manage current state
@@ -15,12 +14,16 @@ function CreateTrip2() {
     const [loading, setLoading] = useState(false);
     const [groupType, setGroupType] = useState('');
     const [budget, setBudget] = useState('');
+    const [startLocation, setStartLocation] = useState('');
+    const [endLocation, setEndLocation] = useState('');
+    const [selectedCountries, setSelectedCountries] = useState([]);
 
     // MESSY SHIT!!!!!!!
     let content;
     if (loading) {
         content = (
-                <div className="banter-loader">
+            <div className="mainOutline">
+                <div className="banter-loader loading">
                     <div className="banter-loader__box"></div>
                     <div className="banter-loader__box"></div>
                     <div className="banter-loader__box"></div>
@@ -31,13 +34,14 @@ function CreateTrip2() {
                     <div className="banter-loader__box"></div>
                     <div className="banter-loader__box"></div>
                 </div>
+            </div>
         );
     }
 
     else if (currentState === 'click') {
         content = (
         <div className="mainOutline">
-            <div class="sparkle-button">
+            <div class="sparkle-button generateButton">
             <button onClick={() => {
                         setLoading(true);
                         setTimeout(() => {
@@ -183,7 +187,7 @@ function CreateTrip2() {
                                 <i class="uil uil-map-marker"></i>
                             </div>
                             <div class="icon">
-                                <i class="uil uil-clock"></i>
+                                <i class="uil uil-globe"></i>
                             </div>
                             <div class="icon">
                                 <i class="uil uil-car"></i>
@@ -208,7 +212,7 @@ function CreateTrip2() {
         content = (
             <div className="createTripMain">   
                 <div className="mainOutline">
-                <div className="topSection">
+                    <div className="topSection">
                         <a className='backIcon' onClick={() => setCurrentState('typeSolo')}><i class="uil uil-angle-left-b"></i></a>
                         <div className="apiHolder">
                         <i class="uil uil-flask"></i>
@@ -227,7 +231,7 @@ function CreateTrip2() {
                                 <i class="uil uil-map-marker"></i>
                             </div>
                             <div class="icon">
-                                <i class="uil uil-clock"></i>
+                                <i class="uil uil-globe"></i>
                             </div>
                             <div class="icon">
                                 <i class="uil uil-car"></i>
@@ -236,20 +240,108 @@ function CreateTrip2() {
                                 <i class="uil uil-bed"></i>
                             </div>
                          </div>
+                         <h1 className='mainTitle'>Select your travel dates:</h1>
                     </div>
-                    <div className='budgetContainer'>
-                        <input type="text"
-                            value={budget}
-                            onChange={(e) => setBudget(e.target.value)}
-                            placeholder="Enter your budget"
-                            className="budgetInput" />
-                        <button className='budgetButton' onClick={() => setCurrentState('test')}>Next</button>
-                    </div>
+                    <DateRangePicker onDateRangeSelected={(range) => console.log(range)} />
+                    <button className='budgetButton' onClick={() => setCurrentState('location')}>Next</button>
                 </div>
             </div>
         );
+    }  else if (currentState === 'location') {
+        content = (
+            <div className="createTripMain">   
+                <div className="mainOutline">
+                    <div className="topSection">
+                        <a className='backIcon' onClick={() => setCurrentState('typeSolo')}><i class="uil uil-angle-left-b"></i></a>
+                        <div className="apiHolder">
+                        <i class="uil uil-flask"></i>
+                        <p>Deconnecting API v0.12 Beta</p>
+                        </div>
+                    </div>
+                    <div className="centerSection">
+                        <div class="icon-bar">
+                            <div class="icon">
+                                <i class="uil uil-dollar-sign"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-calendar-alt"></i>
+                            </div>
+                            <div class="icon active">
+                                <i class="uil uil-map-marker"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-globe"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-car"></i>
+                            </div>
+                            <div class="icon">
+                                <i class="uil uil-bed"></i>
+                            </div>
+                         </div>
+                        <h1 className='mainTitle'>Start & End of your Trip</h1>
+                        <div className="locationContainer">
+                            <i class="uil uil-map-marker locationMarker"></i>
+                            <input type="text"
+                                        value={startLocation}
+                                        onChange={(e) => setStartLocation(e.target.value)}
+                                        placeholder="Starting location"
+                                        className="locationInput" />
+                        </div>
+                        <div className="locationContainer">
+                            <i class="uil uil-map-marker locationMarker"></i>
+                            <input type="text"
+                                        value={endLocation}
+                                        onChange={(e) => setEndLocation(e.target.value)}
+                                        placeholder="Ending location"
+                                        className="locationInput" />
+                        </div>
+                    </div>
+                    <button className='budgetButton' onClick={() => setCurrentState('countryChooser')}>Next</button>
+                </div>
+            </div>
+        );
+    } else if (currentState === 'countryChooser') {
+        content = (
+            <div className="createTripMain">
+                <div className="mainOutline">
+                    <div className="topSection">
+                            <a className='backIcon' onClick={() => setCurrentState('typeSolo')}><i class="uil uil-angle-left-b"></i></a>
+                            <div className="apiHolder">
+                            <i class="uil uil-flask"></i>
+                            <p>Deconnecting API v0.12 Beta</p>
+                            </div>
+                        </div>
+                        <div className="centerSection">
+                            <div class="icon-bar">
+                                <div class="icon">
+                                    <i class="uil uil-dollar-sign"></i>
+                                </div>
+                                <div class="icon">
+                                    <i class="uil uil-calendar-alt"></i>
+                                </div>
+                                <div class="icon">
+                                    <i class="uil uil-map-marker"></i>
+                                </div>
+                                <div class="icon active">
+                                    <i class="uil uil-globe"></i>
+                                </div>
+                                <div class="icon">
+                                    <i class="uil uil-car"></i>
+                                </div>
+                                <div class="icon">
+                                    <i class="uil uil-bed"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 className="mainTitle">Select Countries to Visit</h1>
+                        <MapComponent setSelectedCountries={setSelectedCountries} />
+                        <div>Selected Countries: {selectedCountries.join(', ')}</div>
+                        <button className='budgetButton' onClick={() => setCurrentState('location')}>Next</button>
+                    </div>
+            </div>
+        );
     }
-
     // handle what happens
     // idk api dings bums
     useEffect(() => {
@@ -265,14 +357,12 @@ function CreateTrip2() {
 
     return(
         <div className='createTripContainer'>
-            <div className="container">
                 <div className="headerAndMain">
                     <div className="header">
                         <h1 className='archivo mainHeader'>Create your <em>very own</em> adventure now</h1>
                     </div>  
                         {content} {/* Render content based on current state */}
                 </div>
-            </div>
         </div>
     );
 }
